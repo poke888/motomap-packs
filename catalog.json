@@ -1,0 +1,63 @@
+{
+  "formatVersion": 1,
+  "engineVersion": "3.5.1",
+  "updatedAt": "2026-07-13T14:46:01Z",
+  "regions": [
+    {
+      "id": "nb",
+      "name": "New Brunswick",
+      "country": "CA",
+      "sizeBytes": 49561600,
+      "bbox": [
+        -69.05975,
+        44.19205,
+        -62.88575,
+        48.38075
+      ],
+      "version": "20260713",
+      "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/nb-valhalla_tiles.tar"
+    },
+    {
+      "id": "ns",
+      "name": "Nova Scotia",
+      "country": "CA",
+      "sizeBytes": 56596480,
+      "bbox": [
+        -67.24728,
+        42.10691,
+        -58.22593,
+        47.89793
+      ],
+      "version": "20260713",
+      "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/ns-valhalla_tiles.tar"
+    },
+    {
+      "id": "pei",
+      "name": "Prince Edward Island",
+      "country": "CA",
+      "sizeBytes": 10199040,
+      "bbox": [
+        -64.60236,
+        45.82497,
+        -61.24878,
+        47.68573
+      ],
+      "version": "20260713",
+      "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/pei-valhalla_tiles.tar"
+    },
+    {
+      "id": "maine",
+      "name": "Maine",
+      "country": "US",
+      "sizeBytes": 113827840,
+      "bbox": [
+        -71.08891,
+        42.85443,
+        -66.87164,
+        47.46222
+      ],
+      "version": "20260713",
+      "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/maine-valhalla_tiles.tar"
+    }
+  ]
+}
