@@ -34,6 +34,45 @@ The build pipeline lives in the `moto-routes` repo:
 full recipe in `docs/region-packs.md` (Geofabrik extract → digest-pinned
 one-shot Valhalla container → tar → catalog → `gh release upload`).
 
+## Merged multi-province packs (`maritimes`)
+
+Valhalla can't stitch two separate packs at route time — a trip needs ONE
+pack whose graph covers every point end to end. `maritimes` (NB + NS + PEI,
+116.6 MB, built 2026-07-25) exists so a cross-province trip like
+Fredericton → Halifax has a single covering pack to route through.
+
+Built by feeding all three provinces' `.osm.pbf` extracts to
+`valhalla_build_tiles` in one `docker run` (same digest-pinned 3.5.1 image,
+same `build_elevation=True`/`build_tar=True` settings as every other pack) —
+**not** an `osmium merge`. Valhalla's own build log warns
+("Tile building using more than one osm.pbf extract is discouraged... See
+valhalla/valhalla#3925") and reports several thousand "possible duplicate"
+edges across the three levels; empirically this did NOT break connectivity
+at the NB/NS border — a live smoke-test route from St. George, NB to
+Halifax, NS (motorcycle costing) returned a real 484 km / 274 min route
+through `Fort Lawrence Road` → `NS 104` → `Highway 102`, i.e. it genuinely
+crosses the isthmus using both provinces' road data in one pack. If a
+future rebuild of this region ever produces a broken/disconnected route
+near a province border, merge the extracts with `osmium merge` first
+(Valhalla's own recommendation) rather than trusting the multi-pbf path —
+this repo's build only skipped that step because the smoke test passed.
+
+**Known app-side gap (not fixed here, not this repo's code): the
+catalog-region "smallest bbox wins" selection used for the CONTEXTUAL
+pack-download offer can under-offer `maritimes`.** Geofabrik extract bboxes
+are padded rectangles, not real coverage shapes — New Brunswick's bbox
+rectangle happens to reach Halifax's longitude/latitude, so for a rider who
+already has `nb` installed, the app's offer logic sees "the smallest
+catalog region covering both trip endpoints is already installed" and
+never prompts to download `maritimes`, even though `nb`'s actual road graph
+has no Nova Scotia roads. The on-device ROUTER's own retry ladder is fine —
+it tries covering packs smallest-bbox-first and falls through to the next
+one on a genuine no-edges failure, so routing succeeds once `maritimes` (or
+`ns`) is actually installed. Riders who already have `nb` currently need to
+add `maritimes` manually from Settings → Offline Maps rather than being
+offered it inline. This is a `PackOfferCoordinator`/`decide()` selection
+question in the iOS app, out of scope for this repo.
+
 ## Data attribution
 
 Routing data is processed from [OpenStreetMap](https://www.openstreetmap.org)

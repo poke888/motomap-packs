@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "engineVersion": "3.5.1",
-  "updatedAt": "2026-07-13T14:46:01Z",
+  "updatedAt": "2026-07-25T00:55:00Z",
   "regions": [
     {
       "id": "nb",
@@ -58,6 +58,20 @@
       ],
       "version": "20260713",
       "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/maine-valhalla_tiles.tar"
+    },
+    {
+      "id": "maritimes",
+      "name": "Maritimes (NB, NS, PEI)",
+      "country": "CA",
+      "sizeBytes": 116643840,
+      "bbox": [
+        -69.05975,
+        42.10691,
+        -58.22593,
+        48.38075
+      ],
+      "version": "20260725",
+      "url": "https://github.com/poke888/motomap-packs/releases/download/packs-20260713/maritimes-valhalla_tiles.tar"
     }
   ]
 }
